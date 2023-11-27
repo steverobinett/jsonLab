@@ -20,42 +20,13 @@ var staffObj = [
   { fName: "Alice", age: 30 },
 ];
 
-var staffJSON = JSON.stringify(staffObj);
-document.getElementById("employee").textContent = staffObj[0].fName;
 
-//view in dev tools
-console.log(staffJSON);
 
 //2. Joke
 
-var jokeObj = JSON.parse(jokeStr);
-document.getElementById("chuck").textContent = jokeObj.value;
 
 
 //3. Wx
-
-var wxRepStr = apiStubCall();
-var wxRepObj = JSON.parse(wxRepStr);
-
-var htmlStr = "";
-for (var i = 0; i < wxRepObj.daily.length; i++) {
-  var currDay = new Date(wxRepObj.daily[i].dt * 1000);
-  htmlStr += `<h3>${currDay.toDateString()}</h3>`;
-  htmlStr += `<p>Hi Temp: ${wxRepObj.daily[i].temp.max}</p>`;
-  htmlStr += `<p>Lo Temp: ${wxRepObj.daily[i].temp.min}</p>`;
- ;
-
- document.getElementById("weather").innerHTML = htmlStr;
-  
-}
-// var hiTemp = wxRepObj.daily[0].temp.max;
-// var currDay = new Date(wxRepObj.daily[0].dt * 1000);
-// console.log(currDay.toDateString());
-
-// document.getElementById("weather").innerHTML = `Hi Temp: ${hiTemp}`; 
-
-
-
 
 function apiStubCall() {
   return JSON.stringify({
