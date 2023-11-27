@@ -21,7 +21,7 @@ var staffObj = [
 ];
 
 var staffJSON = JSON.stringify(staffObj);
-document.getElementById("employee").textContent = staffObj[0].fName;
+document.getElementById("employee").textContent = `Employee:  ${staffObj[0].fName}`;
 
 //view in dev tools
 console.log(staffJSON);

@@ -37,9 +37,22 @@ document.getElementById("chuck").textContent = jokeObj.value;
 var wxRepStr = apiStubCall();
 var wxRepObj = JSON.parse(wxRepStr);
 
-var hiTemp = wxRepObj.daily[0].temp.max;
+var htmlStr = "";
+for (var i = 0; i < wxRepObj.daily.length; i++) {
+  var currDay = new Date(wxRepObj.daily[i].dt * 1000);
+  htmlStr += `<h3>${currDay.toDateString()}</h3>`;
+  htmlStr += `<p>Hi Temp: ${wxRepObj.daily[i].temp.max}</p>`;
+  htmlStr += `<p>Lo Temp: ${wxRepObj.daily[i].temp.min}</p>`;
+ ;
 
-document.getElementById("weather").innerHTML = `Hi Temp: ${hiTemp}`; 
+ document.getElementById("weather").innerHTML = htmlStr;
+  
+}
+// var hiTemp = wxRepObj.daily[0].temp.max;
+// var currDay = new Date(wxRepObj.daily[0].dt * 1000);
+// console.log(currDay.toDateString());
+
+// document.getElementById("weather").innerHTML = `Hi Temp: ${hiTemp}`; 
 
 
 
