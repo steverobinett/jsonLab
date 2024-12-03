@@ -12,7 +12,7 @@ var jokeStr = JSON.stringify({
   updated_at: "2020-01-05 13:42:29.296379",
   url: "https://api.chucknorris.io/jokes/TpoNVdfUREacCSqIJsq-2Q",
   value:
-    "there are no such thing as a tornado Chuck Norris just don't like trailer parks.",
+    "there are no such things as a tornado. Chuck Norris just doesn't like trailer parks.",
 });
 
 //1. Staff - arr of 2 objs
@@ -31,6 +31,9 @@ document.getElementById(
 
 //view in dev tools
 console.log(staffJSON);
+let testDate = new Date("2024-12-02T02:00");
+console.log(`TEST: Day is: ${testDate.toLocaleDateString()}
+Time is ${testDate.toLocaleTimeString()}`);
 
 //2. Joke
 
