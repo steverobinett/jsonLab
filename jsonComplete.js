@@ -42,17 +42,15 @@ document.getElementById("chuck").textContent = jokeObj.value;
 
 //3. Wx
 
-var wxRepStr = apiStubCall();
-var wxRepObj = JSON.parse(wxRepStr);
+var wxRespStr = apiStubCall();
+var wxRespObj = JSON.parse(wxRespStr);
 
 var htmlStr = "";
-for (var i = 0; i < wxRepObj.daily.length; i++) {
-  var currDay = new Date(wxRepObj.daily[i].dt * 1000);
-  htmlStr += `<h3>${currDay.toDateString()}</h3>`;
-  htmlStr += `<p>Hi Temp: ${wxRepObj.daily[i].temp.max}</p>`;
-  htmlStr += `<p>Lo Temp: ${wxRepObj.daily[i].temp.min}</p>`;
+
+  var currDay = new Date(wxRespObj.current.time);
+  htmlStr += currDay.toDateString();
   document.getElementById("weather").innerHTML = htmlStr;
-}
+
 
 // API call
 //https://api.open-meteo.com/v1/forecast?latitude=47.5002&longitude=-111.3008&current=temperature_2m&hourly=temperature_2m&daily=weather_code&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=America%2FDenver
