@@ -1,72 +1,56 @@
 
-//API endpoint for the Chuck Norris Joke Machine
-// https://api.chucknorris.io/
-
-createTable();
-
-var jokeStr = JSON.stringify({
-  categories: [],
-  created_at: "2020-01-05 13:42:29.296379",
-  icon_url: "https://assets.chucknorris.host/img/avatar/chuck-norris.png",
-  id: "TpoNVdfUREacCSqIJsq-2Q",
-  updated_at: "2020-01-05 13:42:29.296379",
-  url: "https://api.chucknorris.io/jokes/TpoNVdfUREacCSqIJsq-2Q",
-  value:
-    "there are no such things as a tornado. Chuck Norris just doesn't like trailer parks.",
-});
-
-//1. Staff - arr of 2 objs
-//NB diff between view via console.log and dev tools  -
-//2nd is more readable
-
-var staffObj = [
-  { fName: "Robert", age: 42 },
-  { fName: "Alice", age: 30 },
-];
-
-var staffJSON = JSON.stringify(staffObj);
-
-
-//view in dev tools
-console.log(staffJSON);
-let testDate = new Date("2024-12-02T02:00");
-console.log(`TEST: Day is: ${testDate.toLocaleDateString()}
-Time is ${testDate.toLocaleTimeString()}`);
-
-//2. Joke
-
-var jokeObj = JSON.parse(jokeStr);
-document.getElementById("chuck").textContent = jokeObj.value;
-
-//3. Wx
 
 
 
-function createTable(){
-  var wxRespStr = apiStubCall();
-  var wxRespObj = JSON.parse(wxRespStr);
 
-  let tHead = document.getElementById("tblHead");
-  let row = document.createElement("tr");
-  const numDays = 5;
-  const dayOffset = 24; 
-  let dataCount =wxRespObj.hourly.time.length;
 
-  for(let i=0; i < numDays; i++){
-    let currDay = new Date(wxRespObj.hourly.time[i*dayOffset]);
-    let cstr = currDay.toDateString();
-    let cell = document.createElement("td")
-    cell.textContent = currDay.toDateString();
-    row.appendChild(cell);
-    console.log(cstr);
-  }
+//1. Joke
+//a. get the string response (this simulates what coes back from an api call)
+let jokeStr = jokeApiStub();
+console.log(jokeStr);
+
+//b. Let's turn it into a js object that we can use
+
+let jokeObj = JSON.parse(jokeStr);
+let jokePara = document.getElementById('joke');
+// jokePara.textContent = jokeStr;
+jokePara.textContent = jokeObj.value;
+
+
+
+
+//2. Wx
+let weatherPara = document.getElementById('weather');
+
+let wxObj = JSON.parse(weatherApiStub());
+
+//2a
+// let weatherText = `Date :${wxObj.hourly.time[0]} <br>Temperature:${wxObj.hourly.temperature_2m[0]}<br>`;
+// weatherText += `There are ${wxObj.hourly.time.length} hours in the report`;
+// weatherPara.innerHTML = weatherText;
+
+//2b - mamage date from json
+
+// let wxDate = new Date(wxObj.hourly.time[0]);
+// let weatherText = `${wxDate.toLocaleDateString()}`;
+// weatherPara.textContent = weatherText;
+
+//2c
+let weatherText ='';
+for(let i=0; i < wxObj.hourly.time.length; i++){
+  let dt = new Date(wxObj.hourly.time[i]);
+
+  weatherText += `${dt.toLocaleDateString()} ${wxObj.hourly.temperature_2m[i]} <br>`;
+
 }
 
+weatherPara.innerHTML = weatherText;
 
-// API call
+
+// API call 7 days hourly
 //https://api.open-meteo.com/v1/forecast?latitude=47.5002&longitude=-111.3008&current=temperature_2m&hourly=temperature_2m&daily=weather_code&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=America%2FDenver
 
-function apiStubCall() {
+function weatherApiStub() {
   return JSON.stringify( {
     latitude: 47.48983,
     longitude: -111.31442,
@@ -295,3 +279,22 @@ function apiStubCall() {
     },
   });
 }
+
+//API endpoint for the Chuck Norris Joke Machine
+// https://api.chucknorris.io/
+
+function jokeApiStub(){
+  return JSON.stringify(
+  {
+    "categories": [],
+    "created_at": "2020-01-05 13:42:26.447675",
+    "icon_url": "https://api.chucknorris.io/img/avatar/chuck-norris.png",
+    "id": "qCE6vrfAT0u8CeDrjDTGmg",
+    "updated_at": "2020-01-05 13:42:26.447675",
+    "url": "https://api.chucknorris.io/jokes/qCE6vrfAT0u8CeDrjDTGmg",
+    "value": "Chuck Norris decided it shall be called pineapple, and the world accepted it out of sheer terror even though the fruit had nothing to do with pines or apples."
+  }
+);
+}
+
+

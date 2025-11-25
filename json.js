@@ -1,14 +1,4 @@
-var jokeStr = JSON.stringify(
-  {
-    "categories": [],
-    "created_at": "2020-01-05 13:42:26.447675",
-    "icon_url": "https://api.chucknorris.io/img/avatar/chuck-norris.png",
-    "id": "qCE6vrfAT0u8CeDrjDTGmg",
-    "updated_at": "2020-01-05 13:42:26.447675",
-    "url": "https://api.chucknorris.io/jokes/qCE6vrfAT0u8CeDrjDTGmg",
-    "value": "Chuck Norris decided it shall be called pineapple, and the world accepted it out of sheer terror even though the fruit had nothing to do with pines or apples."
-  }
-);
+
 
 
 
@@ -16,14 +6,14 @@ var jokeStr = JSON.stringify(
 
 
 
-//2. Wx
+//2. Weather
 
 
 
 // API call 7 days hourly
 //https://api.open-meteo.com/v1/forecast?latitude=47.5002&longitude=-111.3008&current=temperature_2m&hourly=temperature_2m&daily=weather_code&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=America%2FDenver
 
-function apiStubCall() {
+function weatherApiStub() {
   return JSON.stringify( {
     latitude: 47.48983,
     longitude: -111.31442,
@@ -251,6 +241,23 @@ function apiStubCall() {
       weather_code: [3, 3, 3, 3, 3, 3, 3],
     },
   });
+}
+
+//API endpoint for the Chuck Norris Joke Machine
+// https://api.chucknorris.io/
+
+function jokeApiStub(){
+  return JSON.stringify(
+  {
+    "categories": [],
+    "created_at": "2020-01-05 13:42:26.447675",
+    "icon_url": "https://api.chucknorris.io/img/avatar/chuck-norris.png",
+    "id": "qCE6vrfAT0u8CeDrjDTGmg",
+    "updated_at": "2020-01-05 13:42:26.447675",
+    "url": "https://api.chucknorris.io/jokes/qCE6vrfAT0u8CeDrjDTGmg",
+    "value": "Chuck Norris decided it shall be called pineapple, and the world accepted it out of sheer terror even though the fruit had nothing to do with pines or apples."
+  }
+);
 }
 
 
