@@ -2,7 +2,7 @@
 //API endpoint for the Chuck Norris Joke Machine
 // https://api.chucknorris.io/
 
-
+createTable();
 
 var jokeStr = JSON.stringify({
   categories: [],
@@ -25,9 +25,7 @@ var staffObj = [
 ];
 
 var staffJSON = JSON.stringify(staffObj);
-document.getElementById(
-  "employee"
-).textContent = `Employee:  ${staffObj[0].fName}`;
+
 
 //view in dev tools
 console.log(staffJSON);
@@ -42,14 +40,27 @@ document.getElementById("chuck").textContent = jokeObj.value;
 
 //3. Wx
 
-var wxRespStr = apiStubCall();
-var wxRespObj = JSON.parse(wxRespStr);
 
-var htmlStr = "";
 
-  var currDay = new Date(wxRespObj.current.time);
-  htmlStr += currDay.toDateString();
-  document.getElementById("weather").innerHTML = htmlStr;
+function createTable(){
+  var wxRespStr = apiStubCall();
+  var wxRespObj = JSON.parse(wxRespStr);
+
+  let tHead = document.getElementById("tblHead");
+  let row = document.createElement("tr");
+  const numDays = 5;
+  const dayOffset = 24; 
+  let dataCount =wxRespObj.hourly.time.length;
+
+  for(let i=0; i < numDays; i++){
+    let currDay = new Date(wxRespObj.hourly.time[i*dayOffset]);
+    let cstr = currDay.toDateString();
+    let cell = document.createElement("td")
+    cell.textContent = currDay.toDateString();
+    row.appendChild(cell);
+    console.log(cstr);
+  }
+}
 
 
 // API call
